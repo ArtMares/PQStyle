@@ -1,0 +1,40 @@
+Include <b>Style.php</b> in your <b>main.php</b> file and usage:
+
+<pre>
+  require_once("qrc://%%projectname%%/%%addonpath%%/Style.php");
+
+  /* Initialize class */
+  $style = new Style("%child_dir%");
+
+  or
+
+  new Style("%child_dir");
+
+  /* Set Theme name to use in application */
+  $style->setTheme("%theme_name%");
+
+  or
+
+  Style::setTheme("%theme_name%");
+  
+  class MainWindow extends QWidget {
+
+    public function __construct() {
+
+      parent::__consctruct();
+
+      /* Set styleSheet to element */
+      $this->styleSheet = Style::get("%filename%");
+
+      or
+
+      Style::set($this, "%filename%");
+
+    }
+
+    /* ... */
+
+  }
+  
+  /* ... */
+</pre>
