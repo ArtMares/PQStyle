@@ -101,8 +101,14 @@
  * @version 0.3
  *
  * Исправлено объявление объектов QDir и QFile так как они не корректно уничтожались из-за чего возникало падение приложения
+ *
+ * Добавлен поиск файла конфигурации в ресурсах приложения и в дочерней директории приложения,
+ * Если файл конфигурации не будет найден то Адд-он не загрузит ни одного файла стилей
+ *
  */
+
 class Style {
+
     /** Переменная отвечающая за тему по умочанию */
     static private $theme;
     /** Массив стилей тем */
@@ -113,12 +119,12 @@ class Style {
     static private $tree = array();
     /** Путь к директории расположения тем оформления */
     static private $path;
-    /** Директория в ресурсах приложения аналогичная директории раположения тем оформления */
-    private $resource;
     /** Объект QDir расширения PQEngine File System */
     static private $dir;
     /** Объект QFile расширения PQEngine File System */
     static private $file;
+    /** Директория в ресурсах приложения аналогичная директории раположения тем оформления */
+    private $resource;
 
     /**
      * Style constructor.
@@ -206,7 +212,7 @@ class Style {
             self::$file->close();
         } else {
             /** Если файл конфигураци нет в ресурсах приложения то ищем его в директории приложения */
-            self::$file->setFileName("/$this->resource/styleSheet.json");
+            self::$file->setFileName(self::$path."/styleSheet.json");
             if(self::$file->exxists()) {
                 self::$file->oprn(QFile::ReadOnly);
                 /** Поручаем данные из файла конфигурации назходящегося в ресурсах приложения */
@@ -268,7 +274,6 @@ class Style {
             self::$dir->setPath(self::$tree[$name]);
             /** Проверяем директорию на существование */
             if(self::$dir->exists()) {
-                $file = new QFile();
                 /** Получаем списко файлов с расширением .qss */
                 $styles = self::$dir->entryList(QDir::Files | '*.qss');
                 /** Обрабатываем список файлов */
