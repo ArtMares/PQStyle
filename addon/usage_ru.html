@@ -1,19 +1,19 @@
 ﻿Подключите <b>Style.php</b> в файле <b>main.php</b> и используйте:
 
 <pre>
-  require_once("qrc://%%projectname%%/%%addonpath%%/Style.php");
+  require_once("qrc://%%addonpath%%/Style.php");
 
   /* Инициализировать класс */
   $style = new Style("%child_dir%");
 
-  or
+  или
 
   new Style("%child_dir%");
 
   /* Задаем тему оформления для приложения */
   $style->setTheme("%theme_name%");
 
-  or
+  или
 
   Style::setTheme("%theme_name%");
   
@@ -26,7 +26,7 @@
       /* Задаем стиль элементу */
       $this->styleSheet = Style::get("%filename%");
 
-      or
+      или
 
       Style::set($this, "%filename%");
 

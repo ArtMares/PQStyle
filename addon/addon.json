@@ -2,7 +2,7 @@
     "fullname": "Style",
     "author": "ArtMares",
     "desc": "Use qss stylesheet files in applications",
-    "version": "0.2",
+    "version": "0.3",
     "includes": [
         "Style.php"
     ],
